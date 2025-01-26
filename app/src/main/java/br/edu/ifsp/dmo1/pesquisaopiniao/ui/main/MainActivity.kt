@@ -1,4 +1,4 @@
-package br.edu.ifsp.dmo1.pesquisaopiniao.ui
+package br.edu.ifsp.dmo1.pesquisaopiniao.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
