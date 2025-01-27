@@ -1,10 +1,10 @@
-package br.edu.ifsp.dmo1.pesquisaopiniao.ui.details
+package br.edu.ifsp.dmo1.pesquisaopiniao.ui.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.dmo1.pesquisaopiniao.R
 
-class participateSearchActivity : AppCompatActivity() {
+class ParticipateSearchActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

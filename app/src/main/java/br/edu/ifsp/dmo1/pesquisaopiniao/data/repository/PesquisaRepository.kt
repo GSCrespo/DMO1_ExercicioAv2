@@ -19,4 +19,8 @@ class PesquisaRepository (context: Context) {
     fun addAluno(dadoAluno: Aluno) = dao.insertAluno(dadoAluno)
     fun addVoto(dadoVoto: Voto) = dao.insertVoto(dadoVoto)
 
+    // Novo método para buscar o total de votos
+    fun getTotalVotes(): Int {
+        return dao.getContagemVotos()
+    }
 }
