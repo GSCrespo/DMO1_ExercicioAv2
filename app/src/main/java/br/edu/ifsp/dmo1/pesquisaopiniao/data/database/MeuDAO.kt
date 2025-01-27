@@ -35,7 +35,7 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
     fun insertVoto(dadosVoto: Voto){
         val values = contentValuesOf().apply {
             put(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO,dadosVoto.codigo)
-            put(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO,dadosVoto.opcao)
+            put(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_OPCAO, dadosVoto.opcao)
         }
 
         val db = dbhelper.writableDatabase
@@ -94,22 +94,39 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
         val columns = arrayOf(
             "COUNT(*) AS total"
         )
-
         val db = dbhelper.readableDatabase
 
-        val cursor = db.query(
-            DatabaseHelper.DATABASE_KEYS.TABLE_VOTO,columns,null,null,
-            null,null,null
+        val cursor = db.query(DatabaseHelper.DATABASE_KEYS.TABLE_VOTO, columns, null, null, null, null, null)
+        return cursor.use {
+            if (cursor.moveToFirst()) cursor.getInt(cursor.getColumnIndexOrThrow("total")) else 0
+        }
+    }
+
+    // para verificar se o aluno já tem voto registrado
+    fun getVotoByAluno(prontuario: String): Voto? {
+        val columns = arrayOf(
+            DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO,
+            DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_OPCAO
         )
 
+        val where = "${DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO} IN (SELECT ${DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO} FROM ${DatabaseHelper.DATABASE_KEYS.TABLE_ALUNO} WHERE ${DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO} = ?)"
+        val whereArgs = arrayOf(prontuario)
 
-        var contagem = 0
+        val db = dbhelper.readableDatabase
+        val cursor = db.query(
+            DatabaseHelper.DATABASE_KEYS.TABLE_VOTO, columns, where, whereArgs, null, null, null
+        )
+
+        var voto: Voto? = null
+
         cursor.use {
-            // apos uns testes o movetoNext neste caso nao funciona por conta de retornar 1 linha
-            if (cursor.moveToFirst()) {
-                contagem = cursor.getInt(cursor.getColumnIndexOrThrow("total"))
+            if (cursor.moveToNext()) {
+                voto = Voto(
+                    cursor.getString(0),
+                    cursor.getString(1)
+                )
             }
         }
-        return contagem;
+        return voto
     }
 }

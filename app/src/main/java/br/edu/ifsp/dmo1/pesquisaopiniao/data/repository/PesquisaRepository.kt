@@ -23,4 +23,9 @@ class PesquisaRepository (context: Context) {
     fun getTotalVotes(): Int {
         return dao.getContagemVotos()
     }
+
+    fun getVotoByAluno(prontuario: String): Voto? {
+        return dao.getVotoByAluno(prontuario)
+    }
+
 }

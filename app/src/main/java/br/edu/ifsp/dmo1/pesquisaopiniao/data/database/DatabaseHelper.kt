@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_KEYS.DATABASE_NAME,null,DATABASE_KEYS.DATABASE_VERSION) {
-
     object DATABASE_KEYS{
         const val DATABASE_NAME = "PesquisaVotos_databse.db"
         const val DATABASE_VERSION = 1
@@ -21,17 +20,13 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_KEY
     }
 
     private companion object {
-
         const val CREATE_TABLE_ALUNO = "CREATE TABLE ${DATABASE_KEYS.TABLE_ALUNO} " +
                 "(" + "${DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO} TEXT PRIMARY KEY NOT NULL," +
                 "${DATABASE_KEYS.COLUMN_ALUNO_NAME})"
 
         const val CREATE_TABLE_VOTO = "CREATE TABLE ${DATABASE_KEYS.TABLE_VOTO} " +
-                "(" + "${DATABASE_KEYS.COLUMN_VOTO_CODIGO} TEXT PRIMARY KEY AUTOINCREMENT," +
+                "(" + "${DATABASE_KEYS.COLUMN_VOTO_CODIGO} TEXT PRIMARY KEY," +
                 "${DATABASE_KEYS.COLUMN_VOTO_OPCAO} TEXT)"
-
-
-
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -40,7 +35,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_KEY
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-
         // por enquanto nao ha necessidade de outra versao no banco, deixarei nao implementado
     }
 
