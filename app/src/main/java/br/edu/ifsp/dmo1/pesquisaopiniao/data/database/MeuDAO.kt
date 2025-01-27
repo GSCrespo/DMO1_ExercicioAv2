@@ -87,4 +87,29 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
         }
         return dado
     }
+
+
+    fun getContagemVotos() : Int{
+        // declarando a coluna como COUNT para apenas retornar o valor total de votos
+        val columns = arrayOf(
+            "COUNT(*) AS total"
+        )
+
+        val db = dbhelper.readableDatabase
+
+        val cursor = db.query(
+            DatabaseHelper.DATABASE_KEYS.TABLE_VOTO,columns,null,null,
+            null,null,null
+        )
+
+
+        var contagem = 0
+        cursor.use {
+            // apos uns testes o movetoNext neste caso nao funciona por conta de retornar 1 linha
+            if (cursor.moveToFirst()) {
+                contagem = cursor.getInt(cursor.getColumnIndexOrThrow("total"))
+            }
+        }
+        return contagem;
+    }
 }

@@ -11,7 +11,7 @@ class PesquisaRepository (context: Context) {
     private val dbHelper = DatabaseHelper(context)
     private val dao = MeuDAO(dbHelper)
 
-
+    //usar para verificar se o aluno ja participou da pesquisa
     fun getAlunoByProntuario(prontuario : String) : Aluno?{
         return dao.getByProntuario(prontuario)
     }
