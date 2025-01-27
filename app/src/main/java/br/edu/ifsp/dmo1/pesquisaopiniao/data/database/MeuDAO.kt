@@ -63,4 +63,36 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
 
 
     }
+
+
+    fun getByProntuario(prontuario: String): Aluno?{
+        val columns = arrayOf(
+            DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO,
+            DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_NAME
+        )
+
+        val where = "${DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO} = ?"
+        val whereArgs = arrayOf(prontuario)
+
+        val db = dbhelper.readableDatabase
+
+        val cursor = db.query(
+            DatabaseHelper.DATABASE_KEYS.TABLE_ALUNO,columns,where,whereArgs,null,null,null
+        )
+
+        val dado: Aluno?
+
+        cursor.use {
+            dado = if(cursor.moveToNext()){
+                Aluno(
+                    cursor.getString(0), // prontuario
+                    cursor.getString(1) // nome
+                )
+            }
+            else{
+                null
+            }
+        }
+        return dado
+    }
 }
