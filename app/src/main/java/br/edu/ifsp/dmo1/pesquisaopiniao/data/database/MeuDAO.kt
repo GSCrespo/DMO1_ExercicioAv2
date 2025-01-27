@@ -27,19 +27,15 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
 
         }catch (e: Exception){
             Log.e("DatabaseException","Erro ao inserir aluno")
-        }finally {
-            db.close()
         }
-
 
     }
 
 
     fun insertVoto(dadosVoto: Voto){
         val values = contentValuesOf().apply {
-            put(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_ID,dadosVoto.id)
             put(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO,dadosVoto.codigo)
-            put(DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO,dadosVoto.voto_prontuario)
+            put(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO,dadosVoto.opcao)
         }
 
         val db = dbhelper.writableDatabase
@@ -56,11 +52,7 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
 
         }catch (e: Exception){
             Log.e("DatabaseException","Erro ao inserir o voto")
-        }finally {
-            db.close()
         }
-
-
 
     }
 

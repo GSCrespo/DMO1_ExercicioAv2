@@ -15,11 +15,8 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_KEY
         const val COLUMN_ALUNO_PRONTUARIO = "prontuario"
         const val COLUMN_ALUNO_NAME = "nome"
 
-        const val COLUMN_VOTO_ID = "id"
         const val COLUMN_VOTO_CODIGO = "codigo"
-
-        // chave estrangeira pra relacionar 1 voto com apenas 1 aluno
-        const val COLUMN_VOTO_PRONTUARIO = "voto_prontuario"
+        const val COLUMN_VOTO_OPCAO = "opcao"
 
     }
 
@@ -30,11 +27,10 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_KEY
                 "${DATABASE_KEYS.COLUMN_ALUNO_NAME})"
 
         const val CREATE_TABLE_VOTO = "CREATE TABLE ${DATABASE_KEYS.TABLE_VOTO} " +
-                "(" + "${DATABASE_KEYS.COLUMN_VOTO_ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "${DATABASE_KEYS.COLUMN_VOTO_CODIGO}," +
-                "${DATABASE_KEYS.COLUMN_VOTO_PRONTUARIO} TEXT NOT NULL," +
-                "FOREIGN KEY (${DATABASE_KEYS.COLUMN_VOTO_PRONTUARIO})" +
-                "REFERENCES ${DATABASE_KEYS.TABLE_ALUNO}(${DATABASE_KEYS.COLUMN_VOTO_PRONTUARIO}))"
+                "(" + "${DATABASE_KEYS.COLUMN_VOTO_CODIGO} TEXT PRIMARY KEY AUTOINCREMENT," +
+                "${DATABASE_KEYS.COLUMN_VOTO_OPCAO} TEXT)"
+
+
 
     }
 
