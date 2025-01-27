@@ -10,7 +10,6 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
     fun insertAluno(dadosAluno: Aluno){
         val values = contentValuesOf().apply {
             put(DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO,dadosAluno.prontuario)
-            put(DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_NAME,dadosAluno.nome)
         }
 
         val db = dbhelper.writableDatabase
@@ -78,7 +77,6 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
             dado = if(cursor.moveToNext()){
                 Aluno(
                     cursor.getString(0), // prontuario
-                    cursor.getString(1) // nome
                 )
             }
             else{

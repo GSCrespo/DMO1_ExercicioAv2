@@ -18,15 +18,13 @@
         android:id="@+id/btnParticipar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Participar da Pesquisa"
-        android:enabled="false"/>
+        android:text="Participar da Pesquisa" />
 
     <Button
         android:id="@+id/btnChecarVoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Checar Meu Voto"
-        android:enabled="false"
         android:layout_marginTop="16dp"/>
 
     <Button

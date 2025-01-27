@@ -1,60 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.participateSearchActivity">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textl_prontuario"
+    <!-- Título da Tela -->
+    <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Digite o seu prontuário."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:text="Participar da Pesquisa"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_textoProntuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_name"
+    <!-- Campo de entrada para o prontuário -->
+    <EditText
+        android:id="@+id/inputProntuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Digite o seu nome."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textl_prontuario">
+        android:hint="Insira seu prontuário"
+        android:inputType="text"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_textoName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_SendParticipate"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
+    <!-- Spinner para selecionar a opção de voto -->
+    <Spinner
+        android:id="@+id/spinnerOptions"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Enviar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        android:layout_marginBottom="16dp" />
 
+    <!-- Botão para registrar o voto -->
+    <Button
+        android:id="@+id/buttonSubmitVote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar Voto"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
 
+    <!-- Mensagem de erro -->
+    <TextView
+        android:id="@+id/tvErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Erro ao registrar o voto."
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Mensagem de sucesso -->
+    <TextView
+        android:id="@+id/tvSuccessMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Voto registrado com sucesso!"
+        android:textColor="@android:color/holo_green_dark"
+        android:visibility="gone"
+        android:textSize="14sp" />
+
+</LinearLayout>
