@@ -28,4 +28,14 @@ class PesquisaRepository (context: Context) {
         return dao.getVotoByAluno(prontuario)
     }
 
+    fun hasAlunoVoted(prontuario: String): Boolean {
+        val voto = dao.getVotoByAluno(prontuario)
+        return voto != null
+    }
+
+    fun getTotalVotesByOption(opcao: String): Int {
+        return dao.getTotalVotesByOption(opcao)
+    }
+
+
 }

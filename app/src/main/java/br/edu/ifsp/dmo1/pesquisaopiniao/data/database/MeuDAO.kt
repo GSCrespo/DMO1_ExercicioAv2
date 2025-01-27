@@ -95,11 +95,17 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
             "COUNT(*) AS total"
         )
         val db = dbhelper.readableDatabase
+        val cursor = db.query(
+            DatabaseHelper.DATABASE_KEYS.TABLE_VOTO, columns, null, null, null, null, null
+        )
 
-        val cursor = db.query(DatabaseHelper.DATABASE_KEYS.TABLE_VOTO, columns, null, null, null, null, null)
-        return cursor.use {
-            if (cursor.moveToFirst()) cursor.getInt(cursor.getColumnIndexOrThrow("total")) else 0
+        var contagem = 0
+        cursor.use {
+            if (cursor.moveToFirst()) {
+                contagem = cursor.getInt(cursor.getColumnIndexOrThrow("total"))
+            }
         }
+        return contagem
     }
 
     // para verificar se o aluno já tem voto registrado
@@ -128,5 +134,25 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
             }
         }
         return voto
+    }
+
+    //contando votos por opção
+    fun getTotalVotesByOption(opcao: String): Int {
+        val columns = arrayOf("COUNT(*) AS total")
+        val where = "${DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_OPCAO} = ?"
+        val whereArgs = arrayOf(opcao)
+
+        val db = dbhelper.readableDatabase
+        val cursor = db.query(
+            DatabaseHelper.DATABASE_KEYS.TABLE_VOTO, columns, where, whereArgs, null, null, null
+        )
+
+        var contagem = 0
+        cursor.use {
+            if (cursor.moveToFirst()) {
+                contagem = cursor.getInt(cursor.getColumnIndexOrThrow("total"))
+            }
+        }
+        return contagem
     }
 }
