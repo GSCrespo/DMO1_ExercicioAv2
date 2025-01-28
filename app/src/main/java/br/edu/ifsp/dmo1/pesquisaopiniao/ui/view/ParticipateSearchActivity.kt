@@ -67,7 +67,7 @@ class ParticipateSearchActivity : AppCompatActivity() {
 
         viewModel.votoRegistrado.observe(this) { voto ->
             if (voto != null) {
-                Toast.makeText(this, "Voto registrado: ${voto.opcao}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Voto registrado: ${voto.opcao}. Código: ${voto.codigo}", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -59,7 +59,6 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
     fun getByProntuario(prontuario: String): Aluno?{
         val columns = arrayOf(
             DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO,
-            DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_NAME
         )
 
         val where = "${DatabaseHelper.DATABASE_KEYS.COLUMN_ALUNO_PRONTUARIO} = ?"
@@ -152,5 +151,33 @@ class MeuDAO (private val dbhelper : DatabaseHelper) {
             }
         }
         return contagem
+    }
+
+    fun getVotoByCodigo(codigo: String): Voto? {
+        val columns = arrayOf(
+            DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO,
+            DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_OPCAO
+        )
+
+        val where = "${DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO} = ?"
+        val whereArgs = arrayOf(codigo)
+
+        val db = dbhelper.readableDatabase
+        val cursor = db.query(
+            DatabaseHelper.DATABASE_KEYS.TABLE_VOTO, columns, where, whereArgs, null, null, null
+        )
+
+        var voto: Voto? = null
+
+        cursor.use {
+            if (cursor.moveToNext()) {
+                voto = Voto(
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_CODIGO)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.DATABASE_KEYS.COLUMN_VOTO_OPCAO))
+                )
+            }
+        }
+
+        return voto
     }
 }

@@ -17,15 +17,12 @@ class PesquisaRepository (context: Context) {
     }
 
     fun addAluno(dadoAluno: Aluno) = dao.insertAluno(dadoAluno)
+
     fun addVoto(dadoVoto: Voto) = dao.insertVoto(dadoVoto)
 
     // Novo método para buscar o total de votos
     fun getTotalVotes(): Int {
         return dao.getContagemVotos()
-    }
-
-    fun getVotoByAluno(prontuario: String): Voto? {
-        return dao.getVotoByAluno(prontuario)
     }
 
     fun hasAlunoVoted(prontuario: String): Boolean {
@@ -37,5 +34,7 @@ class PesquisaRepository (context: Context) {
         return dao.getTotalVotesByOption(opcao)
     }
 
-
+    fun getVotoByCodigo(codigo: String): Voto? {
+        return dao.getVotoByCodigo(codigo)
+    }
 }
