@@ -2,6 +2,7 @@ package br.edu.ifsp.dmo1.pesquisaopiniao.ui.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.viewmodel.MainViewModel
@@ -33,6 +34,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnFinalizar.setOnClickListener {
             mainViewModel.finishSurvey()
+
+            // alterei a dinamica aqui para ficar de acordo com o doc de requisitos, para exibir
+            // as contagens apenas apos clicar no botao finalizar
+            binding.txtVoteCount.visibility = View.VISIBLE
+            binding.txtResults.visibility = View.VISIBLE
         }
 
         // usando o observer para o livedata para atualizar os dados
