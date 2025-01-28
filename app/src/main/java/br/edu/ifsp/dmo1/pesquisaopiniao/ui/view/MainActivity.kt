@@ -2,15 +2,11 @@ package br.edu.ifsp.dmo1.pesquisaopiniao.ui.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import br.edu.ifsp.dmo1.pesquisaopiniao.R
 import br.edu.ifsp.dmo1.pesquisaopiniao.ui.viewmodel.MainViewModel
 import br.edu.ifsp.dmo1.pesquisaopiniao.data.repository.PesquisaRepository
+import br.edu.ifsp.dmo1.pesquisaopiniao.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,33 +14,35 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by lazy {
         MainViewModel(repository)
     }
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Botões de navegação
-        findViewById<Button>(R.id.btnParticipar).setOnClickListener {
+
+
+        binding.btnParticipar.setOnClickListener {
             startActivity(Intent(this, ParticipateSearchActivity::class.java))
         }
 
-        findViewById<Button>(R.id.btnChecarVoto).setOnClickListener {
+        binding.btnChecarVoto.setOnClickListener {
             startActivity(Intent(this, ResultActivity::class.java))
         }
 
-        findViewById<Button>(R.id.btnFinalizar).setOnClickListener {
+        binding.btnFinalizar.setOnClickListener {
             mainViewModel.finishSurvey()
         }
 
+        // usando o observer para o livedata para atualizar os dados
         mainViewModel.voteCount.observe(this, Observer { voteCount ->
-            // Exibir contagem de votos
-            findViewById<TextView>(R.id.txtVoteCount).text = "Total de Votos: $voteCount"
+            binding.txtVoteCount.text = "Total de Votos: $voteCount"
         })
 
         mainViewModel.totalVotes.observe(this, Observer { totalVotes ->
-            // Exibir total de votos por opção
             totalVotes?.let {
-                findViewById<TextView>(R.id.txtResults).text = it.toString()
+                binding.txtResults.text = it.toString()
             }
         })
     }
