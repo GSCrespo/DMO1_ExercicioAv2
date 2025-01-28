@@ -33,6 +33,9 @@ class ParticipateSearchActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, options)
         binding.spinnerOptions.adapter = adapter
 
+        //setando usuario para nulo sempre que essa activity é aberta
+        //viewModel.setAlunoNull()
+
         setupObservers()
 
         // botão para registrar voto

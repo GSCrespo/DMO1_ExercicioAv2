@@ -27,19 +27,25 @@ class ParticipateSearchViewModel(private val repository: PesquisaRepository) : V
             .joinToString("")
     }
 
+
     // registrar o voto
     fun registerVoto(prontuario: String, opcao: String) {
         val aluno = repository.getAlunoByProntuario(prontuario)
 
-        //aluno existe e ainda não votou
-        if (aluno == null) {
+        if (aluno != null) {
+            if (repository.hasAlunoVoted(prontuario)) {
+                _errorMessage.value = "Você já votou na pesquisa."
+            } else {
+                val codigoVoto = generateRandomCode()
+                val voto = Voto(opcao = opcao, codigo = codigoVoto)
+                repository.addVoto(voto)
+                _votoRegistrado.value = voto
+                _successMessage.value = "Voto registrado com sucesso! Código: $codigoVoto"
+            }
+        } else {
             val novoAluno = Aluno(prontuario = prontuario)
             repository.addAluno(novoAluno)
-        }
 
-        if (repository.hasAlunoVoted(prontuario)) {
-            _errorMessage.value = "Você já votou na pesquisa."
-        } else {
             val codigoVoto = generateRandomCode()
             val voto = Voto(opcao = opcao, codigo = codigoVoto)
             repository.addVoto(voto)
@@ -47,6 +53,7 @@ class ParticipateSearchViewModel(private val repository: PesquisaRepository) : V
             _successMessage.value = "Voto registrado com sucesso! Código: $codigoVoto"
         }
     }
+
 
     fun resetMessages() {
         _errorMessage.value = null
