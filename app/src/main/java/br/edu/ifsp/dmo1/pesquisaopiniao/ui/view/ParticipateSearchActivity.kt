@@ -3,6 +3,7 @@ package br.edu.ifsp.dmo1.pesquisaopiniao.ui.view
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -33,9 +34,6 @@ class ParticipateSearchActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, options)
         binding.spinnerOptions.adapter = adapter
 
-        //setando usuario para nulo sempre que essa activity é aberta
-        //viewModel.setAlunoNull()
-
         setupObservers()
 
         // botão para registrar voto
@@ -48,6 +46,12 @@ class ParticipateSearchActivity : AppCompatActivity() {
             } else {
                 viewModel.registerVoto(prontuario, selectedOption)
             }
+        }
+
+        val backButton = findViewById<Button>(R.id.backButton)
+        backButton.setOnClickListener {
+            // retornar para a Main Activity
+            finish()
         }
     }
 

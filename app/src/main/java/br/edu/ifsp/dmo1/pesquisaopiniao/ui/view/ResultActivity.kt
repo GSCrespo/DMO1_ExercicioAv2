@@ -2,6 +2,7 @@ package br.edu.ifsp.dmo1.pesquisaopiniao.ui.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,12 @@ class ResultActivity : AppCompatActivity() {
             } else {
                 viewModel.buscarVotoPorCodigo(codigo)
             }
+        }
+
+        val backButton = findViewById<Button>(R.id.backButton)
+        backButton.setOnClickListener {
+            // retornar para a Main Activity
+            finish()
         }
     }
 

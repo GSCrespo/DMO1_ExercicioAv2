@@ -7,19 +7,17 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
-    <!-- Título da Tela -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Participar da Pesquisa"
+        android:text="O que você achou do novo calendário acadêmico para 2025?"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
         android:textColor="@android:color/black"
         android:layout_marginBottom="16dp" />
 
-    <!-- Campo de entrada para o prontuário -->
     <EditText
         android:id="@+id/inputProntuario"
         android:layout_width="match_parent"
@@ -29,14 +27,12 @@
         android:padding="12dp"
         android:layout_marginBottom="16dp" />
 
-    <!-- Spinner para selecionar a opção de voto -->
     <Spinner
         android:id="@+id/spinnerOptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />
 
-    <!-- Botão para registrar o voto -->
     <Button
         android:id="@+id/buttonSubmitVote"
         android:layout_width="match_parent"
@@ -46,7 +42,12 @@
         android:padding="12dp"
         android:layout_marginBottom="16dp" />
 
-    <!-- Mensagem de erro -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Voltar para a tela inicial" />
+
     <TextView
         android:id="@+id/tvErrorMessage"
         android:layout_width="match_parent"
@@ -57,7 +58,6 @@
         android:textSize="14sp"
         android:layout_marginBottom="8dp" />
 
-    <!-- Mensagem de sucesso -->
     <TextView
         android:id="@+id/tvSuccessMessage"
         android:layout_width="match_parent"
@@ -66,5 +66,4 @@
         android:textColor="@android:color/holo_green_dark"
         android:visibility="gone"
         android:textSize="14sp" />
-
 </LinearLayout>
